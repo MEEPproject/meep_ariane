@@ -9,9 +9,10 @@ int main()
     init_uart(UART_FREQ, 115200);
     print_uart(info);
 
-    print_uart("sd initialized!\r\n");
+    //print_uart("sd initialized!\r\n");
+    print_uart("Custom Bootloader for MEEP");
 
-    int res = gpt_find_boot_partition((uint8_t *)0x80000000UL, 2 * 16384);
+    //int res = gpt_find_boot_partition((uint8_t *)0x80000000UL, 2 * 16384);
 
     return 0;
 }

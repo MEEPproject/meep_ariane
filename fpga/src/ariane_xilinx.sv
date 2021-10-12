@@ -137,6 +137,32 @@ module ariane_xilinx (
   input  wire [7:0]    pci_exp_rxp     ,
   input  wire [7:0]    pci_exp_rxn     ,
   input  logic         trst_n          ,
+`elsif ALVEOU280
+  input  wire          c0_sys_clk_p    ,  // 100 MHz Clock for DDR
+  input  wire          c0_sys_clk_n    ,  // 100 MHz Clock for DDR
+  input  wire          sys_clk_p       ,  // 100 MHz Clock for PCIe
+  input  wire          sys_clk_n       ,  // 100 MHz Clock for PCIE
+  input  wire          sys_rst_n       ,  // PCIe Reset
+  input  logic         cpu_reset       ,  // CPU subsystem reset
+  output wire [16:0]   c0_ddr4_adr     ,
+  output wire [1:0]    c0_ddr4_ba      ,
+  output wire [0:0]    c0_ddr4_cke     ,
+  output wire [0:0]    c0_ddr4_cs_n    ,
+  inout  wire [71:0]   c0_ddr4_dq      ,
+  inout  wire [17:0]   c0_ddr4_dqs_c   ,
+  inout  wire [71:0]   c0_ddr4_dqs_t   ,
+  output wire [0:0]    c0_ddr4_odt     ,
+  output wire [1:0]    c0_ddr4_bg      ,
+  output wire 		   c0_ddr4_parity  ,
+  output wire          c0_ddr4_reset_n ,
+  output wire          c0_ddr4_act_n   ,
+  output wire [0:0]    c0_ddr4_ck_c    ,
+  output wire [0:0]    c0_ddr4_ck_t    ,
+  output wire [7:0]    pci_exp_txp     ,
+  output wire [7:0]    pci_exp_txn     ,
+  input  wire [7:0]    pci_exp_rxp     ,
+  input  wire [7:0]    pci_exp_rxn     ,
+  input  logic         trst_n          ,  
 `endif
   // SPI
   output logic        spi_mosi    ,
@@ -525,6 +551,9 @@ ariane_peripherals #(
     `elsif VCU118
     .InclSPI      ( 1'b0         ),
     .InclEthernet ( 1'b0         )
+    `elsif ALVEOU280
+    .InclSPI      ( 1'b0         ),
+    .InclEthernet ( 1'b0         )	
     `endif
 ) i_ariane_peripherals (
     .clk_i        ( clk                          ),
@@ -976,6 +1005,42 @@ xlnx_mig_7_ddr3 i_ddr (
   logic [1:0]   dram_dwidth_axi_rresp;
   logic [511:0] dram_dwidth_axi_rdata;
 
+`elsif ALVEOU280
+
+  logic [63:0]  dram_dwidth_axi_awaddr;
+  logic [7:0]   dram_dwidth_axi_awlen;
+  logic [2:0]   dram_dwidth_axi_awsize;
+  logic [1:0]   dram_dwidth_axi_awburst;
+  logic [0:0]   dram_dwidth_axi_awlock;
+  logic [3:0]   dram_dwidth_axi_awcache;
+  logic [2:0]   dram_dwidth_axi_awprot;
+  logic [3:0]   dram_dwidth_axi_awqos;
+  logic         dram_dwidth_axi_awvalid;
+  logic         dram_dwidth_axi_awready;
+  logic [511:0] dram_dwidth_axi_wdata;
+  logic [63:0]  dram_dwidth_axi_wstrb;
+  logic         dram_dwidth_axi_wlast;
+  logic         dram_dwidth_axi_wvalid;
+  logic         dram_dwidth_axi_wready;
+  logic         dram_dwidth_axi_bready;
+  logic [1:0]   dram_dwidth_axi_bresp;
+  logic         dram_dwidth_axi_bvalid;
+  logic [63:0]  dram_dwidth_axi_araddr;
+  logic [7:0]   dram_dwidth_axi_arlen;
+  logic [2:0]   dram_dwidth_axi_arsize;
+  logic [1:0]   dram_dwidth_axi_arburst;
+  logic [0:0]   dram_dwidth_axi_arlock;
+  logic [3:0]   dram_dwidth_axi_arcache;
+  logic [2:0]   dram_dwidth_axi_arprot;
+  logic [3:0]   dram_dwidth_axi_arqos;
+  logic         dram_dwidth_axi_arvalid;
+  logic         dram_dwidth_axi_arready;
+  logic         dram_dwidth_axi_rready;
+  logic         dram_dwidth_axi_rlast;
+  logic         dram_dwidth_axi_rvalid;
+  logic [1:0]   dram_dwidth_axi_rresp;
+  logic [511:0] dram_dwidth_axi_rdata;
+  
 axi_dwidth_converter_512_64 i_axi_dwidth_converter_512_64 (
   .s_axi_aclk     ( ddr_clock_out            ),
   .s_axi_aresetn  ( ndmreset_n               ),
