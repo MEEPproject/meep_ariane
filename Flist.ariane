@@ -61,7 +61,7 @@
 ./tb/ariane_soc_pkg.sv
 ./include/ariane_axi_pkg.sv
 ./include/wt_cache_pkg.sv
-.///include/std_cache_pkg.sv
+//./include/std_cache_pkg.sv
 ./include/axi_intf.sv
 ./include/instr_tracer_pkg.sv
 ./src/util/instr_tracer_if.sv
