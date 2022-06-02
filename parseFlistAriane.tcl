@@ -1,7 +1,7 @@
 #VAS Tile Core: list
 #set_param project.singleFileAddWarning.Threshold 500 
-set fp [open "$ARIANE_ROOT/Flist.ARIANE" r]
-puts "$ARIANE_ROOT/Flist.ARIANE"
+set fp [open "$ARIANE_ROOT/Flist.ariane" r]
+puts "$ARIANE_ROOT/Flist.ariane"
 set file_data [read $fp]
 set data [split $file_data "\n"]
 set ARIANE_RTL_FILES {}
