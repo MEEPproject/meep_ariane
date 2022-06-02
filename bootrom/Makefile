@@ -3,7 +3,8 @@ bootrom_img = bootrom.img bootrom.sv
 GCC=riscv64-unknown-elf-gcc
 OBJCOPY=riscv64-unknown-elf-objcopy
 DTB=ariane.dtb
-PYTHON=python
+#PYTHON=python
+PYTHON=/usr/bin/python2.7
 
 all: $(bootrom_img)
 

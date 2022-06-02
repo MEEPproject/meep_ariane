@@ -643,6 +643,14 @@ package ariane_pkg;
     // Bits required for representation of physical address space as 4K pages
     // (e.g. 27*4K == 39bit address space).
     localparam PPN4K_WIDTH = 38;
+    
+    
+    typedef enum logic [1:0] {
+      FE_NONE,
+      FE_INSTR_ACCESS_FAULT,
+      FE_INSTR_PAGE_FAULT
+    } frontend_exception_t;
+
 
     // ----------------------
     // cache request ports
