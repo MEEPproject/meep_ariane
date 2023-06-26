@@ -21,7 +21,7 @@ all: $(bootrom_img)
 	dtc -I dts $< -O dtb -o $@
 
 %.sv: %.img
-	$(PYTHON) ./gen_rom.py $<
+	python ./gen_rom.py $<
 
 clean:
 	rm -f $(bootrom_img) $(DTB)

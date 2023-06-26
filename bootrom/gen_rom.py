@@ -16,7 +16,7 @@ file = args.filename[0];
 
 # check that file exists
 if not os.path.isfile(file):
-    print("File {} does not exist.".format(filename))
+    print("File {} does not exist.".format(file))
     sys.exit(1)
 
 filename = os.path.splitext(file)[0]
@@ -80,9 +80,9 @@ $content
 def read_bin():
 
     with open(filename + ".img", 'rb') as f:
-        rom = binascii.hexlify(f.read())
+        rom = binascii.hexlify(f.read()).decode()
         rom = map(''.join, zip(rom[::2], rom[1::2]))
-
+        rom = list(rom)
 
     # align to 64 bit
     align = (int((len(rom) + 7) / 8 )) * 8;
