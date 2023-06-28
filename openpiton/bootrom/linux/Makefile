@@ -46,7 +46,7 @@ $(MAIN): ariane.dtb $(OBJS_C) $(OBJS_S) linker.lds
 	dtc -I dts $< -O dtb -o $@
 
 %.sv: %.img
-	$(PYTHON) ./gen_rom.py $<
+	python3 gen_rom.py $<
 	@echo "PYTHON >= $(MAIN_SV)"
 
 clean:
