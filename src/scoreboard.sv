@@ -353,7 +353,7 @@ module scoreboard #(
   // sequential process
   always_ff @(posedge clk_i or negedge rst_ni) begin : regs
     if(!rst_ni) begin
-      mem_q                 <= '{default: 0};
+      mem_q                 <= mem_q'{default: 0};
       issue_cnt_q           <= '0;
       commit_pointer_q      <= '0;
       issue_pointer_q       <= '0;
